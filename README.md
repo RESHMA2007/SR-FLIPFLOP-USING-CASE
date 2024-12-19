@@ -48,28 +48,22 @@ procedure:1.Type the program in Quartus software.
 **PROGRAM**
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: Reshma R RegisterNumber:24900406
-*/module ex06(q,q_bar,s,r,clk,reset);
-//SR Flip Flop Behavioural Level using "case"
-input s,r,clk,reset;
-output reg q;
-output q_bar;
-always@(posedge clk)begin //for synchronous reset
-if (!reset) q<=0;
-else
-begin
-case({s,r})
-2'b00:q<=q;//no change
-2'b01:q<=1'b0; //write logic for reset
-2'b10:q<=1'b1; //write logic for set
-2'b11:q<=1'bx; //write logic for Invalid state
-endcase
-end
-end
-assign q_bar=~q;
+```
+module ex6sr(s,r,clk,q,qbar);
+input s,r,clk;
+output q,qbar;
+wire w1,w2;
+nand(w1,s,clk);
+nand(w2,r,clk);
+nand(q,w1,qbar);
+nand(qbar,q,w2);
 endmodule
+```
 
 **RTL LOGIC FOR FLIPFLOPS**
 
+
 **TIMING DIGRAMS FOR FLIP FLOPS**
+
 
 **RESULTS**
