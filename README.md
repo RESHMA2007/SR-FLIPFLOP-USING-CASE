@@ -34,8 +34,9 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
-procedure:1.Type the program in Quartus software.
+```
+
+1.Type the program in Quartus software.
 
 2.Compile and run the program.
 
@@ -44,29 +45,51 @@ procedure:1.Type the program in Quartus software.
 4.Create nodes for inputs and outputs to generate the timing diagram.
 
 5.For different input combinations generate the timing diagram.
+```
+
+
 
 **PROGRAM**
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
+Developed by: Reshma R
+RegisterNumber:24900406
+*/
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: Reshma R RegisterNumber:24900406
 ```
-module ex6sr(s,r,clk,q,qbar);
-input s,r,clk;
-output q,qbar;
-wire w1,w2;
-nand(w1,s,clk);
-nand(w2,r,clk);
-nand(q,w1,qbar);
-nand(qbar,q,w2);
+module exp(s, r, clk, q, qbar);
+  input s, r, clk;
+  output reg q, qbar;
+
+  initial begin
+    q = 0;
+    qbar = 1;
+  end
+
+  always @(posedge clk) begin
+    if (s & r) begin
+      // Invalid condition (both Set and Reset are active)
+      q = 1'bx;
+      qbar = 1'bx;
+    end else if (s) begin
+      // Set condition
+      q = 1;
+      qbar = 0;
+    end else if (r) begin
+      // Reset condition
+      q = 0;
+      qbar = 1;
+    end
+    // No change condition is implicitly handled.
+  end
 endmodule
 ```
 
 **RTL LOGIC FOR FLIPFLOPS**
-![Screenshot 2024-12-19 221827](https://github.com/user-attachments/assets/58fd0802-07ae-4647-9198-afc7f03af33d)
-
+![WhatsApp Image 2024-12-03 at 14 25 31_f75fe11d](https://github.com/user-attachments/assets/7e0a222c-8eb6-4357-98da-a11258a4c06f)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![Screenshot 2024-12-19 221845](https://github.com/user-attachments/assets/c20cc574-2845-4ec8-bd1f-c7d81539752e)
-
+![WhatsApp Image 2024-12-03 at 14 25 44_fcbdc5f4](https://github.com/user-attachments/assets/039215d9-81dd-47f0-b705-2ad4bbf21d95)
 
 **RESULTS**
- Thus the program to implement a SR flipflop using verilog and validating their functionality using their functional tables is successfully completed.
+
+Thus the SR flipflop using verilog and validating their functionality using their functional tables are verified.
