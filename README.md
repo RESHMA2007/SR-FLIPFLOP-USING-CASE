@@ -2,7 +2,7 @@
 
 **AIM:**
 
-To implement  SR flipflop using verilog and validating their functionality using their functional tables
+To implement SR flipflop using verilog and validating their functionality using their functional tables
 
 **SOFTWARE REQUIRED:**
 
@@ -34,8 +34,6 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-```
-
 1.Type the program in Quartus software.
 
 2.Compile and run the program.
@@ -45,51 +43,44 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 4.Create nodes for inputs and outputs to generate the timing diagram.
 
 5.For different input combinations generate the timing diagram.
-```
-
 
 
 **PROGRAM**
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
-Developed by: Reshma R
-RegisterNumber:24900406
-*/
-
 ```
-module exp(s, r, clk, q, qbar);
-  input s, r, clk;
-  output reg q, qbar;
-
-  initial begin
-    q = 0;
-    qbar = 1;
-  end
-
-  always @(posedge clk) begin
-    if (s & r) begin
-      // Invalid condition (both Set and Reset are active)
-      q = 1'bx;
-      qbar = 1'bx;
-    end else if (s) begin
-      // Set condition
-      q = 1;
-      qbar = 0;
-    end else if (r) begin
-      // Reset condition
-      q = 0;
-      qbar = 1;
+Program for flipflops and verify its truth table in quartus using Verilog programming.
+Developed by:Reshma R
+RegisterNumber:212224040274
+```
+```verilog
+module EXP_6(q, q_bar, s,r, clk, reset);//SR Flip Flop Behavioral Level using ‘case’ 
+  input s,r,clk, reset;
+  output reg q;
+  output q_bar;
+ 
+  always@(posedge clk) begin // for synchronous reset
+    if(!reset)       
+			q <= 0;
+    else 
+  begin
+      case({s,r})       
+	     2'b00: q <= q;    // No change
+        2'b01:q<=1'b0;   // Write logic for reset
+        2'b10:q<=1'b1;   // Write logic for set
+        2'b11:q<=1'bx;   // Write logic for Invalid state
+      endcase
     end
-    // No change condition is implicitly handled.
   end
+  assign q_bar = ~q;
 endmodule
 ```
-
 **RTL LOGIC FOR FLIPFLOPS**
-![WhatsApp Image 2024-12-03 at 14 25 31_f75fe11d](https://github.com/user-attachments/assets/7e0a222c-8eb6-4357-98da-a11258a4c06f)
+![image](https://github.com/23004513/SR-FLIPFLOP-USING-CASE/assets/138973069/2e7d6ca0-c02b-4c31-b3eb-f90bb1b7e0a5)
+
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![WhatsApp Image 2024-12-03 at 14 25 44_fcbdc5f4](https://github.com/user-attachments/assets/039215d9-81dd-47f0-b705-2ad4bbf21d95)
+![image](https://github.com/23004513/SR-FLIPFLOP-USING-CASE/assets/138973069/78e77503-f09f-4696-8e28-41ec277e5350)
+
 
 **RESULTS**
 
-Thus the SR flipflop using verilog and validating their functionality using their functional tables are verified.
+The observation of the simulation results and confirm the successful execution of the program.
